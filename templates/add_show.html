@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-4">
+        <h5 class="text-center alert alert-info" >ADD NEW STUDENT</h5>
+            <form method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" class="btn-success" value="ADD">
+            </form>
+    </div>
+
+    <div class="col-sm-7 offset-1"> <!-- offset-1 for getting gap between two tables-->
+        <h4 class="text-center alert alert-info" >Show student information</h4>
+<!-- Table Data -->
+            {% if stu %}
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Password</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for i in stu %}<!--# loop for getting all records from DB-->
+                    <tr>
+                      <th scope="row">{{i.id}}</th>
+                      <td>{{i.name}}</td>
+                      <td>{{i.email}}</td>
+                      <td>{{i.pwd}}</td>
+                        <td> <!-- to be continue  from here.......-->
+                          <a href="{% url 'updatedata' i.id %}" class="btn btn-warning btn-sm">edit</a>
+                            <form action="{% url 'deletedata' i.id %}"
+                                  method="post" class="d-inline"> {% csrf_token %}
+                                <input type="submit" class="btn btn-danger"
+                                       value="delete">
+                            </form>
+                      </td>
+                    </tr>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+
+            {% else %}
+            <h4 class="text-center alert alert-warning">No Records</h4>
+
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

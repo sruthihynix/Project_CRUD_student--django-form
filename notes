@@ -1,0 +1,11 @@
+  https://www.youtube.com/watch?v=OPc_oMgjhpM&t=4139s  ---link youtube
+
+Function Based View Model Form CURD projects
+
+   return HttpResponseRedirect('/')  # Redirect to home page or an error page
+   ---> this will redirect you to the home page or firstpage
+   This tells Django to issue an HTTP redirect to the URL '/', which typically represents the home page.
+path('', views.add_show_fun, name='add_show')
+
+class="d-inline" same line il varan
+
